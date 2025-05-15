@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Testimonial = sequelize.define('Testimonial', {
+// const Testimonial = sequelize.define('Testimonial', {
+const Testimonial = sequelize.define('testimonial', {
   img: {
     type: DataTypes.STRING,
     allowNull: true,

@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const UploadCV = sequelize.define('cvLists', {
+// const UploadCV = sequelize.define('cvLists', {
+const UploadCV = sequelize.define('cvlists', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,

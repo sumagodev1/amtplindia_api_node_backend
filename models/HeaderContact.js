@@ -1,7 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
-const HeaderContact = sequelize.define("HeaderContact", {
+// const HeaderContact = sequelize.define("HeaderContact", {
+  const HeaderContact = sequelize.define("headercontact", {
   phone1: {
     type: DataTypes.STRING,
     allowNull: true,
