@@ -67,6 +67,11 @@ const projectDetailsRoutes = require('./routes/projectDetailsRoutes');
 const projectDetailsWithImagesRoutes = require('./routes/projectDetailsWithImagesRoutes')
 const galleryDetailsRoutes = require('./routes/galleryDetailsRoutes');
 const galleryImagesRoutes = require('./routes/galleryImagesRoutes')
+const clientSliderRoutes = require('./routes/clientSliderRoutes');
+const subCategoryRoutes = require('./routes/subCategoryRoutes');
+const projectDetailsWithAllInfoRoutes = require('./routes/projectDetailsWithAllInfoRoutes')
+const downloadDetailsRoutes = require('./routes/DownloadDetailsRoutes');
+
 // app.use("/uploads", express.static("uploads"));
 
 // app.use('/about', about);
@@ -106,6 +111,10 @@ app.use('/projectDetails', projectDetailsRoutes);
 app.use('/projectDetailsWithImages',projectDetailsWithImagesRoutes)
 app.use('/galleryDetails',galleryDetailsRoutes)
 app.use('/galleryImages',galleryImagesRoutes)
+app.use('/clientslider',clientSliderRoutes)
+app.use('/subcategory', subCategoryRoutes);
+app.use('/projectDetailsWithAllInfo',projectDetailsWithAllInfoRoutes)
+app.use('/downloadDetails',downloadDetailsRoutes)
 
 // Test DB connection
 const testDbConnection = async () => {

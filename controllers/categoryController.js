@@ -136,8 +136,10 @@ exports.addCategory = async (req, res) => {
 // };
 
 const sequelize = require('../config/database'); // Import the sequelize instance
+const SubCategory = require("../models/SubCategory");
 const ProjectDetails = require('../models/ProjectDetails');
 const ProjectDetailsWithImages = require("../models/ProjectDetailsWithImages");
+const ProjectDetailsWithAllInfo = require("../models/ProjectDetailsWithAllInfo");
 
 exports.updateCategory = async (req, res) => {
   const transaction = await sequelize.transaction(); // Start a transaction
@@ -175,13 +177,18 @@ exports.updateCategory = async (req, res) => {
     await category.save({ transaction });
 
     // Update ProjectDetails table where project_category_id matches the Category ID
+    await SubCategory.update(
+      { project_category_id: id, project_category: title }, // Update the related fields
+      { where: { project_category_id: id }, transaction }
+    );
+
     await ProjectDetails.update(
       { project_category_id: id, project_category: title }, // Update the related fields
       { where: { project_category_id: id }, transaction }
     );
 
-    // Update ProjectDetailsWithImages table where project_category_id matches the Category ID
-    await ProjectDetailsWithImages.update(
+    // Update ProjectDetailsWithAllInfo table where project_category_id matches the Category ID
+    await ProjectDetailsWithAllInfo.update(
       { project_category: title }, // Update project_category in the second table
       { where: { project_category_id: id }, transaction }
     );
