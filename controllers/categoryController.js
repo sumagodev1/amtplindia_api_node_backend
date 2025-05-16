@@ -180,6 +180,7 @@ exports.updateCategory = async (req, res) => {
     await SubCategory.update(
       { project_category_id: id, project_category: title }, // Update the related fields
       { where: { project_category_id: id }, transaction }
+      
     );
 
     await ProjectDetails.update(

@@ -127,7 +127,7 @@ const updateProjectImages = async (req, res) => {
 
       if (existingProject && existingProject.id !== parseInt(id)) {
         return res.status(400).json({
-          message: `Project with the name '${subproject_category}' already exists in this category.`,
+          message: `Project with the name '${subproject_category}' already exists for this category.`,
         });
       }
     }
