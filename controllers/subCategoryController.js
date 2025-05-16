@@ -77,17 +77,30 @@ exports.updateSubCategory = async (req, res) => {
     }
 
     // Check if another category already has the same title in the Category table
-    const existingCategories = await SubCategory.findAll({ where: { project_category, subproject_category, project_category_id }, transaction });
+    const existingCategories = await SubCategory.findAll({ where: { project_category_id, subproject_category }, transaction });
     
     // Implementing new logic: Allow update if the same category is being updated, 
     // but prevent if another category has the same title and is not deleted
+    // if (existingCategories.length > 0) {
+    //   const hasActiveCategory = existingCategories.some(cat => cat.isDelete === false && cat.id !== parseInt(id));
+    //   if (hasActiveCategory) {
+    //     await transaction.rollback();
+    //     return apiResponse.validationErrorWithData(
+    //       res,
+    //       "Sub Project with this Project already exists",
+    //       {}
+    //     );
+    //   }
+    // }
     if (existingCategories.length > 0) {
-      const hasActiveCategory = existingCategories.some(cat => cat.isDelete === false && cat.id !== parseInt(id));
-      if (hasActiveCategory) {
+      const isDuplicate = existingCategories.some(
+        cat => cat.isDelete === false && cat.id !== parseInt(id)
+      );
+      if (isDuplicate) {
         await transaction.rollback();
         return apiResponse.validationErrorWithData(
           res,
-          "Sub Project with this Project already exists",
+          "This Sub Project already exists under the selected Project Category",
           {}
         );
       }
